@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<title>HR application</title>
+<script>
+
+function formValidation(frm)
+{
+var valid=true;
+var firstInvalidComponent=null;
+var name=frm.name.value.trim();
+var nameErrorSection=document.getElementById('nameErrorSection');
+nameErrorSection.innerHTML="";
+if(name.length==0)
+{
+nameErrorSection.innerHTML='Name required';
+valid=false;
+firstInvalidComponent=frm.name;
+}
+
+var designation=frm.designationCode.value.trim();
+var designationCodeErrorSection=document.getElementById('designationCodeErrorSection');
+designationCodeErrorSection.innerHTML="";
+if(designation==-1)
+{
+designationCodeErrorSection.innerHTML='Select Designation';
+valid=false;
+if(firstInvalidComponent==null) firstInvalidComponent=frm.designationCode;
+}
+
+var dateOfBirth=frm.dateOfBirth.value.trim();
+var dateOfBirthErrorSection=document.getElementById('dateOfBirthErrorSection');
+dateOfBirthErrorSection.innerHTML="";
+if(dateOfBirth.length==0)
+{
+dateOfBirthErrorSection.innerHTML='Date of Birth required';
+valid=false;
+if(firstInvalidComponent=null) firstInvalidComponent=frm.dateOfBirth;
+}
+
+
+var genderErrorSection=document.getElementById('genderErrorSection');
+genderErrorSection.innerHTML="";
+if(frm.gender[0].checked==false && frm.gender[1].checked==false)
+{
+genderErrorSection.innerHTML='Select Gender';
+valid=false;
+}
+
+var basicSalary=frm.basicSalary.value.trim();
+var basicSalaryErrorSection=document.getElementById('basicSalaryErrorSection');
+basicSalaryErrorSection.innerHTML="";
+if(basicSalary.length==0)
+{
+basicSalaryErrorSection.innerHTML='Basic Salary required';
+valid=false;
+if(firstInvalidComponent==null)firstInvalidComponent=frm.basicSalary;
+}
+else
+{
+var bb='0123456789.';
+var e=0;
+var i;
+var isBasicSalaryValid=true;
+while(e<basicSalary.length)
+{
+if(bb.indexOf(basicSalary.charAt(e))==-1)
+{
+basicSalaryErrorSection.innerHTML='Invalid Basic Salary';
+valid=false;
+if(firstInvalidComponent==null)firstInvalidComponent=frm.basicSalary;
+}
+e++;
+}
+if(isBasicSalaryValid)
+{
+var dot=basicSalary.indexOf(".");
+if(dot!=-1)
+{
+var numberOfFractions=basicSalary.length-(dot+1);
+if(numberOfFractions>2)
+{
+basicSalaryErrorSection.innerHTML='Invalid Basic Salary';
+valid=false;
+if(firstInvalidComponent==null)firstInvalidComponent=frm.basicSalary;
+}
+}
+}
+}
+
+var panCardNumber=frm.panCardNumber.value.trim();
+var panCardNumberErrorSection=document.getElementById('panCardNumberErrorSection');
+panCardNumberErrorSection.innerHTML="";
+if(panCardNumber.length==0)
+{
+panCardNumberErrorSection.innerHTML='PANN card number required';
+valid=false;
+firstInvalidComponent=frm.panCardNumber;
+}
+
+var aadharCardNumber=frm.aadharCardNumber.value.trim();
+var aadharCardNumberErrorSection=document.getElementById('aadharCardNumberErrorSection');
+aadharCardNumberErrorSection.innerHTML="";
+if(aadharCardNumber.length==0)
+{
+aadharCardNumberErrorSection.innerHTML='Aadhar card number required';
+valid=false;
+firstInvalidComponent=frm.aadharCardNumber;
+}
+
+
+
+
+if(!valid) firstInvalidComponent.focus();
+return valid;
+}
+
+</script>
+</head>
+<body>
+<!--Main Container starts here-->
+<div style='width:90hw; height:95vh; border: 1px solid black'>
+
+<!--header starts here-->
+<div style='width:90hw; height : auto;  border: 1px solid white; padding : 5pt'>
+<img src='/styleone/images/logo.jpg' style='padding : 5px; float:left;'><div style='font-size:20pt; margin-top:12px; margin-bottom:12px'>Thinking Machines</div></img>
+
+</div> <!--header ends here-->
+<!--Content container starts here-->
+<div style='width : 90hw; height:75vh; border:1px solid white; padding : 5px'>
+<!--Left panel starts here--->
+<div style='height:73vh; width : auto; border:1px solid black; padding : 7px; float:left'>
+<a href='/styleone/designationView'> Designations</a><br>
+<b> Employees</b> <br><br>
+<a href='/styleone/index.html' style='padding : 5px;'>Home</a>
+</div><!--Left panel left here--->
+<!--Right panel starts here--->
+<div style='height:74.3vh; width:60hw; margin-left:105px; border:1px solid black'>
+<h3>Employees (Add Module)</h3><br>
+<table>
+<form method='post' action='/styleone/addEmployee' onsubmit='return formValidation(this)'>
+<tr>
+<td>Name</td> 
+<td><input type='text' id='name' name='name' maxlength='50'> <span id='nameErrorSection' style='color:red;'></span></td>
+</tr>
+
+<tr>
+<td>Designation</td> 
+<td><select id='designationCode' name='designationCode'> 
+<option value='-1'>&lt; Designation &gt; </option>
+<option value='1'>Manger </option>
+<option value='2'>Clerk</option>
+<option value='3'>Cook</option>
+<option value='4'>Engineer</option>
+</select>
+<span id='designationCodeErrorSection' style='color:red;'></span></td>
+
+</tr>
+
+<tr>
+<td>Date of birth</td> 
+<td><input type='date' id='dateOfBirth' name='dateOfBirth'> <span id='dateOfBirthErrorSection' style='color:red;'></span></td>
+</tr>
+
+<tr>
+<td>Gender</td> 
+<td><input type='radio' id='male' name='gender' value='M'> Male
+<input type='radio' id='female' name='gender' value='F'> Female
+<span id='genderErrorSection' style='color:red;'></span></td>
+</tr>
+
+<tr>
+<td>Indian ?</td> 
+<td><input type='checkbox' id='isIndian' name='isIndian'> </td>
+</tr>
+
+<tr>
+<td> Basic Salary</td> 
+<td><input type='text' id='basicSalary' name='basicSalary' style='text-align:right'> <span id='basicSalaryErrorSection' style='color:red;'></span></td>
+</tr>
+
+<tr>
+<td>PAN Card Number</td> 
+<td><input type='text' id='panCardNumber' name='panCardNumber' maxlength='15'> <span id='panCardNumberErrorSection' style='color:red;'></span></td>
+</tr>
+
+<tr>
+<td>Aadhar Card Number</td> 
+<td><input type='text' id='aadharCardNumber' name='aadharCardNumber' maxlength='15'> <span id='aadharCardNumberErrorSection' style='color:red;'></span></td>
+</tr>
+
+<tr>
+<td></td> 
+<td></td>
+</tr>
+
+<tr>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <button type='submit'>Add</button></td>
+<td><button type='button' onclick='cancelAddition()'> cancel</button></td>
+</tr>
+</form>
+</table>
+</div> <!--Right panel ends here--->
+</div><!--Content container ends here-->
+<!--Footer starts here-->
+<div style='width:90hw; heigth:auto'>
+	<center style='margin-top:18px;'>&#169; Thinking Machines</center>
+
+</div> <!--Footer ends here-->
+</div> <!--Main Container ends here-->
+</body>
+</html>

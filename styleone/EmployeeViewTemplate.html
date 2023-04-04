@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<title>HR application</title>
+<script>
+function Employees()
+{
+this.employeeId="";
+this.name="";
+this.designation="";
+this.dateOfBirth="";
+this.gender="";
+this.isIndian=true;
+this.basicSalary=0;
+this.panCardNumber="";
+this.aadharCardNumber="";
+}
+
+var employee=[];
+var e=new Employees();
+e.employeeId="A100001";
+e.name="Brajesh Kumar";
+e.designation='engineer';
+e.gender='m';
+e.isIndian=true;
+e.basicSalary=435654;
+e.panCardNumber="2t4633143";
+e.aadharCardNumber=25345;
+employee[0]=e;
+
+e=new Employees();
+e.employeeId="A100002";
+e.name="Brajesh Kumar";
+e.designation='junior engineer';
+e.gender='m';
+e.isIndian=true;
+e.basicSalary=435654;
+e.panCardNumber="34567";
+e.aadharCardNumber=25345;
+employee[1]=e;
+
+var selectedRow=null;
+function selectEmployee(row, employeeId)
+{
+if(row==selectedRow) return;
+if(selectedRow!=null)
+{
+selectedRow.style.background='white';
+selectedRow.style.color='black';
+}
+row.style.background="#7c7b7b";
+row.style.color='white';
+selectedRow=row;
+
+var i;
+for(i=0; i<employee.length; i++)
+{
+if(employee[i].employeeId==employeeId)
+{
+break;
+}
+}
+var emp=employee[i];
+document.getElementById("_employeeId").innerHTML=emp.employeeId;
+document.getElementById("_name").innerHTML=emp.name;
+document.getElementById("_designation").innerHTML=emp.designation;
+document.getElementById("_dateOfBirth").innerHTML=emp.dateOfBirth;
+document.getElementById("_gender").innerHTML=emp.gender;
+document.getElementById("_isIndian").innerHTML=emp.isIndian;
+document.getElementById("_basicSalary").innerHTML=emp.basicSalary;
+document.getElementById("_panCardNumber").innerHTML=emp.panCardNumber;
+document.getElementById("_aadharCardNumber").innerHTML=emp.aadharCardNumber;
+
+}
+</script>
+</head>
+<body>
+<!--Main Container starts here-->
+<div style='width:90hw; height:95vh; border: 1px solid black'>
+
+<!--header starts here-->
+<div style='width:90hw; height : auto;  border: 1px solid white; padding : 5pt'>
+<img src='/styleone/images/logo.jpg' style='padding : 5px; float:left;'><div style='font-size:20pt; margin-top:12px; margin-bottom:12px'>Thinking Machines</div></img>
+
+</div> <!--header ends here-->
+<!--Content container starts here-->
+<div style='width : 90hw; height:75vh; border:1px solid white; padding : 5px'>
+<!--Left panel starts here--->
+<div style='height:73vh; width : auto; border:1px solid black; padding : 7px; float:left'>
+<a href='/styleone/designationView'> Designations</a><br>
+<b> Employees</b> <br><br>
+<a href='/styleone/index.html' style='padding : 5px;'>Home</a>
+</div><!--Left panel left here--->
+<!--Right panel starts here--->
+<div style='height:74.3vh; width:60hw; margin-left:105px; border:1px solid black'>
+<h3>Employees</h3><br>
+
+<div style='height:40vh; width:100%; border:1px solid black; overflow:scroll;'>
+
+<table border='1' width='100%'>
+<thead>
+<tr>
+<th colspan='6' style='text-align:right'> <a href='/styleone/getAddEmployeeForm.html'>Add Employee</a></th>
+
+</tr>
+<tr>
+<th style='width:80px; text-align:center'>S.No</th>
+<th style='width:200px; text-align:center'>Employee Id</th>
+<th style='width:200px; text-align:center'>Name</th>
+<th style='width:200px; text-align:center'>Designations</th>
+<th style='width:80px; text-align:center'>Edit</th>
+<th style='width:80px; text-align:center'>Delete</th>
+
+</tr>
+</thead>
+<tbody>
+<tr style='cursor:pointer' onclick='selectEmployee(this,"A100001")'>
+<td style='text-align:right;'>1.</td>
+<td >A100001</td>
+<td >Brajesh Kumar</td>
+<td >Engineer</td>
+<td style='text-align:center;'><a href='/styleone/editEmployees?employeeId="A100001"'>edit</a></td>
+<td style='text-align:center;'><a href='/styleone/confirmDeleteEmployees?employeeId="A100001"'>delete</a></td>
+<tr>
+
+<tr style='cursor:pointer' onclick='selectEmployee(this,"A100002")'>
+<td style='text-align:right;'>1.</td>
+<td >A100002</td>
+<td >Brajesh Kumar</td>
+<td >Engineer</td>
+<td style='text-align:center;'><a href='/styleone/editEmployees?employeeId="A100001"'>edit</a></td>
+<td style='text-align:center;'><a href='/styleone/confirmDeleteEmployees?employeeId="A100001"'>delete</a></td>
+<tr>
+</tbody>
+</table>
+
+</div >
+
+<div style='height:30vh; width:100%; border:1px solid white;'>
+
+<table >
+<thead >
+<tr style='background:gray; color:white;'>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style='width:450px; padding:5px;'>Employee Id : <span id='_employeeId'></span></td>
+<td style='width:450px; padding:5px;'>Name : <span id='_name'></span></td>
+<td style='width:450px; padding:5px;'>Designation : <span id='_designation'></span></td>
+</tr>
+<tr >
+<td style='width:450px; padding:5px;'>Date of Birth : <span id='_dateOfBirth'></span></td>
+<td style='width:450px; padding:5px;'>Gender : <span id='_gender'></span ></td>
+<td style='width:450px; padding:5px;'>Basic Salary : <span id='_basicSalary'></span></td>
+</tr>
+<tr>
+<td style='width:450px; padding:5px;'>Is Indian : <span id='_isIndian'></span></td>
+<td style='width:450px; padding:5px;'>Pan Card Number : <span id='_panCardNumber'></span></td>
+<td style='width:450px; padding:5px;'>Aadhar Card Number : <span id='_aadharCardNumber'></span></td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div> <!--Right panel ends here--->
+</div><!--Content container ends here-->
+<!--Footer starts here-->
+<div style='width:90hw; heigth:auto'>
+	<center style='margin-top:18px;'>&#169; Thinking Machines</center>
+
+</div> <!--Footer ends here-->
+</div> <!--Main Container ends here-->
+</body>
+</html>v
